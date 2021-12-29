@@ -244,15 +244,17 @@
     } completion:^(BOOL finished) {
         kGYNotiStrongSelf(self);
         
-        // fixed bug: reload data when animate running
-        if (self.currentCell && self.willShowCell) {
-            [self.reuseCells addObject:self.currentCell];
-            [self.currentCell removeFromSuperview];
-            self.currentCell = self.willShowCell;
+        if (self) {
+            // fixed bug: reload data when animate running
+            if (self.currentCell && self.willShowCell) {
+                [self.reuseCells addObject:self.currentCell];
+                [self.currentCell removeFromSuperview];
+                self.currentCell = self.willShowCell;
+            }
+            self.isAnimating = NO;
+            
+            self -> _cIdx ++;            
         }
-        self.isAnimating = NO;
-        
-        self -> _cIdx ++;
     }];
 }
 
